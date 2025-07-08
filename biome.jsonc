@@ -1,0 +1,20 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.1.1/schema.json",
+  "extends": ["ultracite"],
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "tab"
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "enabled": true,
+      "lineWidth": 120,
+      "quoteStyle": "double",
+      "indentStyle": "space",
+      "trailingCommas": "es5"
+    }
+  }
+}
