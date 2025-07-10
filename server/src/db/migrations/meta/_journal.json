@@ -15,6 +15,20 @@
       "when": 1752066052070,
       "tag": "0001_tearful_demogoblin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752171260898,
+      "tag": "0002_salty_thunderbolts",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1752173799589,
+      "tag": "0003_chubby_pyro",
+      "breakpoints": true
     }
   ]
 }

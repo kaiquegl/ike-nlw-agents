@@ -2,10 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Radio } from "lucide-react";
 
 import { QuestionForm } from "@/components/pages/room/question/form";
-import { QuestionItem } from "@/components/pages/room/question/item";
+import { QuestionList } from "@/components/pages/room/question/list";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/room/$id")({
+export const Route = createFileRoute("/room/$id/")({
   component: RouteComponent,
 });
 
@@ -38,28 +38,7 @@ function RouteComponent() {
           <QuestionForm roomId={id} />
         </div>
 
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold text-2xl text-foreground">Perguntas & Respostas</h2>
-          </div>
-
-          <QuestionItem
-            question={{
-              id: "1",
-              question: "Pergunta 1",
-              createdAt: new Date().toISOString(),
-            }}
-          />
-
-          <QuestionItem
-            question={{
-              id: "1",
-              question: "Pergunta 2",
-              answer: "Resposta 2",
-              createdAt: new Date().toISOString(),
-            }}
-          />
-        </div>
+        <QuestionList roomId={id} />
       </div>
     </div>
   );

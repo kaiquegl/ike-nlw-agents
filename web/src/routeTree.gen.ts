@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RoomIndexRouteImport } from './routes/room/index'
 import { Route as HomeIndexRouteImport } from './routes/_home/index'
-import { Route as RoomIdRouteRouteImport } from './routes/room/$id/route'
+import { Route as RoomIdIndexRouteImport } from './routes/room/$id/index'
 import { Route as RoomIdAudioRouteImport } from './routes/room/$id/audio'
 
 const RoomIndexRoute = RoomIndexRouteImport.update({
@@ -24,48 +24,49 @@ const HomeIndexRoute = HomeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RoomIdRouteRoute = RoomIdRouteRouteImport.update({
-  id: '/room/$id',
-  path: '/room/$id',
+const RoomIdIndexRoute = RoomIdIndexRouteImport.update({
+  id: '/room/$id/',
+  path: '/room/$id/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoomIdAudioRoute = RoomIdAudioRouteImport.update({
-  id: '/audio',
-  path: '/audio',
-  getParentRoute: () => RoomIdRouteRoute,
+  id: '/room/$id/audio',
+  path: '/room/$id/audio',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/room/$id': typeof RoomIdRouteRouteWithChildren
   '/': typeof HomeIndexRoute
   '/room': typeof RoomIndexRoute
   '/room/$id/audio': typeof RoomIdAudioRoute
+  '/room/$id': typeof RoomIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/room/$id': typeof RoomIdRouteRouteWithChildren
   '/': typeof HomeIndexRoute
   '/room': typeof RoomIndexRoute
   '/room/$id/audio': typeof RoomIdAudioRoute
+  '/room/$id': typeof RoomIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/room/$id': typeof RoomIdRouteRouteWithChildren
   '/_home/': typeof HomeIndexRoute
   '/room/': typeof RoomIndexRoute
   '/room/$id/audio': typeof RoomIdAudioRoute
+  '/room/$id/': typeof RoomIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/room/$id' | '/' | '/room' | '/room/$id/audio'
+  fullPaths: '/' | '/room' | '/room/$id/audio' | '/room/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/room/$id' | '/' | '/room' | '/room/$id/audio'
-  id: '__root__' | '/room/$id' | '/_home/' | '/room/' | '/room/$id/audio'
+  to: '/' | '/room' | '/room/$id/audio' | '/room/$id'
+  id: '__root__' | '/_home/' | '/room/' | '/room/$id/audio' | '/room/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  RoomIdRouteRoute: typeof RoomIdRouteRouteWithChildren
   HomeIndexRoute: typeof HomeIndexRoute
   RoomIndexRoute: typeof RoomIndexRoute
+  RoomIdAudioRoute: typeof RoomIdAudioRoute
+  RoomIdIndexRoute: typeof RoomIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -84,39 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/room/$id': {
-      id: '/room/$id'
+    '/room/$id/': {
+      id: '/room/$id/'
       path: '/room/$id'
       fullPath: '/room/$id'
-      preLoaderRoute: typeof RoomIdRouteRouteImport
+      preLoaderRoute: typeof RoomIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/room/$id/audio': {
       id: '/room/$id/audio'
-      path: '/audio'
+      path: '/room/$id/audio'
       fullPath: '/room/$id/audio'
       preLoaderRoute: typeof RoomIdAudioRouteImport
-      parentRoute: typeof RoomIdRouteRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface RoomIdRouteRouteChildren {
-  RoomIdAudioRoute: typeof RoomIdAudioRoute
-}
-
-const RoomIdRouteRouteChildren: RoomIdRouteRouteChildren = {
-  RoomIdAudioRoute: RoomIdAudioRoute,
-}
-
-const RoomIdRouteRouteWithChildren = RoomIdRouteRoute._addFileChildren(
-  RoomIdRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
-  RoomIdRouteRoute: RoomIdRouteRouteWithChildren,
   HomeIndexRoute: HomeIndexRoute,
   RoomIndexRoute: RoomIndexRoute,
+  RoomIdAudioRoute: RoomIdAudioRoute,
+  RoomIdIndexRoute: RoomIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

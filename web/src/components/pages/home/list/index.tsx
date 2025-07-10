@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetRoomsQuery } from "@/core/http/queries/rooms/get";
+import { useGetRoomsQuery } from "@/http/queries/rooms/get-rooms";
 import { dayjs } from "@/lib/dayjs";
 
 export function RoomList() {

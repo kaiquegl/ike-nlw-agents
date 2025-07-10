@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { kyApi } from "@/core/http/api";
-import type { GetRoomsResponse } from "@/core/http/types/get-rooms";
+import { kyApi } from "@/http/api";
+import type { GetRoomsResponse } from "@/http/types/get-rooms";
 
 export function useGetRoomsQuery() {
   return useQuery({
